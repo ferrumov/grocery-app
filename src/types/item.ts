@@ -6,4 +6,5 @@ export interface IGroceryItem {
   count: number;
   category?: string;
   completed: boolean;
+  createdAt: number;
 }

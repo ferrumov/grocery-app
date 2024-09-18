@@ -1,5 +1,6 @@
 import { Platform } from 'react-native';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
 import { IGroceryItem } from 'types';
 
 const BASE_URL = Platform.OS === 'android' ? 'http://10.0.2.2:3000/' : 'http://localhost:3000/';
@@ -51,7 +52,6 @@ export const groceriesApi = createApi({
       async onQueryStarted({ ...patch }, api) {
         const patchResult = api.dispatch(
           groceriesApi.util.updateQueryData('list', undefined, (draft) => {
-            // @ts-ignore
             draft.push({ ...patch, completed: false, id: `${Date.now()}`, createdAt: Date.now() });
           }),
         );
