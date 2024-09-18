@@ -86,15 +86,15 @@ export const PressableListItem = forwardRef<any, PressableListItemProps>(
   },
 );
 
+type SelectionWithCurrentKey = Selection & { currentKey: string };
+
 const MenuListItem = ({ items, value, onChange, ...props }: MenuListItemProps) => {
-  const [keys, setKeys] = useState(new Set(value ? [value] : []));
+  const [keys, setKeys] = useState<Selection>(new Set(value ? [value] : []));
 
   const handleSelection = useCallback(
     (selection: Selection) => {
-      // @ts-ignore
       setKeys(selection);
-      // @ts-ignore
-      onChange(selection.currentKey);
+      onChange((selection as SelectionWithCurrentKey).currentKey);
     },
     [onChange],
   );

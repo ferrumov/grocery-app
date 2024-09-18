@@ -3,8 +3,8 @@ import { FormikHelpers } from 'formik';
 import { ScrollView, Button, ButtonText, VStack, useToast } from '@gluestack-ui/themed';
 
 import { ItemFormValues } from 'types';
-import { ItemForm, LoadingContainer, renderErrorToast } from 'components';
 import { MainStackParams, StackProps } from 'navigation/types';
+import { ItemForm, LoadingContainer, renderErrorToast } from 'components';
 import {
   useListQuery,
   useCreateItemMutation,
@@ -21,7 +21,7 @@ export const CreateItemScreen = ({ navigation }: StackProps<MainStackParams, 'Cr
   const onSubmit = async (values: ItemFormValues, helpers: FormikHelpers<ItemFormValues>) => {
     try {
       helpers.setSubmitting(true);
-      await create(values).unwrap();
+      create(values);
       navigation.goBack();
     } catch {
       helpers.setSubmitting(false);
@@ -78,8 +78,7 @@ export const EditItemScreen = ({ navigation, route }: StackProps<MainStackParams
         helpers.setSubmitting(true);
 
         const { name, count, category } = values;
-        await update({ id, name, count, category });
-
+        update({ id, name, count, category });
         navigation.goBack();
       } catch (error) {
         toast.show({
@@ -97,8 +96,7 @@ export const EditItemScreen = ({ navigation, route }: StackProps<MainStackParams
   const onDelete = useCallback(async () => {
     try {
       if (!id) return;
-      await remove({ id }).unwrap();
-
+      remove({ id });
       navigation.goBack();
     } catch (error) {
       toast.show({

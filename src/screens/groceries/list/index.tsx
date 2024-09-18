@@ -12,7 +12,7 @@ import { PlaceholderView } from './placeholder';
 
 export const ListScreen = ({ navigation }: StackProps<HomeStackProps, 'List'>) => {
   const [complete] = useCompleteItemMutation();
-  const { data = [], isLoading } = useListQuery({});
+  const { data = [], isLoading } = useListQuery(undefined);
 
   useLayoutEffect(() => {
     navigation.setOptions({
